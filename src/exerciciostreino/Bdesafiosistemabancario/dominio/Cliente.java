@@ -6,6 +6,7 @@ public class Cliente {
     private String nome;
     private String cpf;
     private int idade;
+    private Banco banco;
     private ArrayList<ContaBancaria> contas;
 
     public Cliente(String nome, String cpf, int idade) {
@@ -24,8 +25,18 @@ public class Cliente {
 
     public void exibirInformacoes() {
         System.out.println("Nome: " + nome + ", CPF: " + cpf + ", Idade: " + idade);
+        System.out.println("----- Contas Bancárias-----");
         for (ContaBancaria conta : contas) conta.imprimConta();
     }
+
+    public void depositar(ContaBancaria conta, double valor) {
+        conta.depositar(valor);
+    }
+
+    public void sacar(ContaBancaria conta, double valor) {
+        conta.sacar(valor);
+    }
+
 
     public String getNome() {
         return nome;

@@ -5,18 +5,18 @@ public class ContaBancaria {
     private double balance;
     private TipoConta accountType;
 
-    public ContaBancaria(String accountNumber, TipoConta accountType) {
+    public ContaBancaria( String accountNumber, TipoConta accountType) {
         this.accountNumber = accountNumber;
         this.accountType = accountType;
     }
 
-    public ContaBancaria(String numeroConta, TipoConta accountType, double depositInitial) {
+    public ContaBancaria( String numeroConta, TipoConta accountType, double depositInitial) {
         this(numeroConta, accountType);
         if (depositInitial < 0) {
             throw new IllegalArgumentException("Valor inválido para depósito");
         }
         balance += depositInitial;
-        System.out.println("Primeiro depósito feito com sucesso. Saldo atual: " + balance);
+        System.out.printf("Primeiro depósito feito com sucesso. Saldo atual: %.2f", +balance);
     }
 
     public void imprimConta() {
@@ -30,15 +30,15 @@ public class ContaBancaria {
             throw new IllegalArgumentException("Valor inválido para depósito");
         }
         balance += valorDepositar;
-        System.out.format("Depósito de %.2f realizado. Novo saldo: %.2f.\n", valorDepositar, this.balance);
+//        System.out.format("Depósito de %.2f concluído. Novo saldo: R$%.2f.\n", valorDepositar, this.balance);
     }
 
     public void sacar(double valorSacar) {
         if (valorSacar > balance) {
-            throw new IllegalArgumentException("Saldo Insuficiente");
+            throw new IllegalArgumentException("Saldo indisponível para saque. Informe um valor válido.");
         }
         balance -= valorSacar;
-        System.out.println("Saque de " + valorSacar + " realizado. Novo saldo: " + balance);
+//        System.out.format("Saque de %.2f realizado. Novo saldo: R$%.2f\n", valorSacar, balance);
     }
 
     public String getAccountNumber() {
