@@ -4,18 +4,18 @@ import java.util.ArrayList;
 
 public class Usuario {
     private String nome;
-    private String numeroIdentificacao;
+    protected static String numeroIdentificacao;
     private ArrayList<Livro> historicoLivrosEmprestados;
 
     public Usuario(String nome, String numeroIdentificacao) {
         this.nome = nome;
-        this.numeroIdentificacao = numeroIdentificacao;
+        Usuario.numeroIdentificacao = numeroIdentificacao;
         this.historicoLivrosEmprestados = new ArrayList<>();
     }
 
     public void exibirUsuario() {
         System.out.println("Nome: " + this.nome +
-                ", N° Identificação: " + this.numeroIdentificacao);
+                ", N° Identificação: " + numeroIdentificacao);
         System.out.println("Livros pegos: ");
         for (Livro livro : historicoLivrosEmprestados) {
             livro.exibirLivro();
@@ -45,14 +45,11 @@ public class Usuario {
     }
 
     public void setNumeroIdentificacao(String numeroIdentificacao) {
-        this.numeroIdentificacao = numeroIdentificacao;
+        Usuario.numeroIdentificacao = numeroIdentificacao;
     }
 
     public ArrayList<Livro> getHistoricoLivrosEmprestados() {
         return historicoLivrosEmprestados;
     }
 
-    public void setHistoricoLivrosEmprestados(ArrayList<Livro> historicoLivrosEmprestados) {
-        this.historicoLivrosEmprestados = historicoLivrosEmprestados;
-    }
 }

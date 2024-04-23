@@ -11,7 +11,7 @@ public class Cliente {
     public Cliente(String nome, String cpf, int idade) {
         this.nome = nome;
         this.cpf = cpf;
-        if(idade <= 0 || idade >= 150){
+        if (idade <= 0 || idade >= 150) {
             throw new IllegalArgumentException("Idade não permitida ou inválida.");
         }
         this.idade = idade;
@@ -24,9 +24,7 @@ public class Cliente {
 
     public void exibirInformacoes() {
         System.out.println("Nome: " + nome + ", CPF: " + cpf + ", Idade: " + idade);
-        for (ContaBancaria conta : contas) {
-            conta.imprimConta();
-        }
+        for (ContaBancaria conta : contas) conta.imprimConta();
     }
 
     public String getNome() {
@@ -50,7 +48,7 @@ public class Cliente {
     }
 
     public void setIdade(int idade) {
-        if(idade <= 0 || idade >= 150){
+        if (idade <= 0 || idade >= 150) {
             throw new IllegalArgumentException("Argumento inválido, idade com valor não permitido.");
         }
         this.idade = idade;
