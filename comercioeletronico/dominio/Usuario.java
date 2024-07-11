@@ -1,6 +1,6 @@
 package praticasjava.comercioeletronico.dominio;
 
-import praticasjava.comercioeletronico.servicos.MetodoPagamento;
+import praticasjava.comercioeletronico.servicos.Pagamento;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ public class Usuario {
         carrinhoDeCompras.removerCarrinho(produto);
     }
 
-    public void realizarPedido(CarrinhoDeCompras carrinho, MetodoPagamento metodoPagamento){
+    public void realizarPedido(CarrinhoDeCompras carrinho, Pagamento metodoPagamento){
         Pedido pedido = new Pedido(carrinho.getProdutos(), carrinho.getQuantidadeCarrinho(), carrinho.totalCarrinho(), metodoPagamento);
         historicoPedidos.add(pedido);
         pedido.confirmarPedido();

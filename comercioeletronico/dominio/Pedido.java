@@ -1,6 +1,6 @@
 package praticasjava.comercioeletronico.dominio;
 
-import praticasjava.comercioeletronico.servicos.MetodoPagamento;
+import praticasjava.comercioeletronico.servicos.Pagamento;
 
 import java.util.List;
 
@@ -8,9 +8,9 @@ public class Pedido {
     private List<Produto> produtos;
     private List<Integer> quantidadeProdutos;
     private double total;
-    private MetodoPagamento metodoDePagamento;
+    private Pagamento metodoDePagamento;
 
-    public Pedido(List<Produto> produtos, List<Integer> quantidadeProdutos, double total, MetodoPagamento metodoDePagamento) {
+    public Pedido(List<Produto> produtos, List<Integer> quantidadeProdutos, double total, Pagamento metodoDePagamento) {
         this.produtos = produtos;
         this.quantidadeProdutos = quantidadeProdutos;
         this.total = total;
@@ -46,15 +46,11 @@ public class Pedido {
         return total;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
-    }
-
-    public MetodoPagamento getMetodoDePagamento() {
+    public Pagamento getMetodoDePagamento() {
         return metodoDePagamento;
     }
 
-    public void setMetodoDePagamento(MetodoPagamento metodoDePagamento) {
+    public void setMetodoDePagamento(Pagamento metodoDePagamento) {
         this.metodoDePagamento = metodoDePagamento;
     }
 }

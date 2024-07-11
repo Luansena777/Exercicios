@@ -1,6 +1,6 @@
 package praticasjava.comercioeletronico.servicos;
 
-public class PagamentoPix implements MetodoPagamento{
+public class PagamentoPix implements Pagamento {
     public final double DESCONTO_PIX = 0.15;
     @Override
     public void pagamento(double valor) {

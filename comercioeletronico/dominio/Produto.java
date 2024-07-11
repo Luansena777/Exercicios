@@ -5,18 +5,24 @@ public class Produto {
     private String descricao;
     private double preco;
     private int quantDisponivel;
+    private Categoria categoria;
 
-    public Produto(String nome, String descricao, double preco, int quantDisponivel) {
+    public Produto() {
+    }
+
+    public Produto(String nome, String descricao, double preco, int quantDisponivel, Categoria categoria) {
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
         this.quantDisponivel = quantDisponivel;
+        this.categoria = categoria;
     }
 
     public void exibirProduto() {
         System.out.println("Produto: " + this.nome + ", Descrição: " + this.descricao +
-                ", Preço: R$" + this.preco + ", Unidades: " + this.quantDisponivel);
+                           ", Preço: R$" + this.preco + ", Unidades: " + this.quantDisponivel + ", Categoria: " + categoria);
     }
+
 
     public String getNome() {
         return nome;
@@ -48,5 +54,13 @@ public class Produto {
 
     public void setQuantDisponivel(int quantDisponivel) {
         this.quantDisponivel = quantDisponivel;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }

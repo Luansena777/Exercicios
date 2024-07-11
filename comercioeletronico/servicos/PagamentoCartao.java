@@ -1,6 +1,6 @@
 package praticasjava.comercioeletronico.servicos;
 
-public class PagamentoCartao implements MetodoPagamento {
+public class PagamentoCartao implements Pagamento {
     @Override
     public void pagamento(double valor) {
         System.out.format("Pagamento de R$%.2f realizado no cartão.\n", valor);
