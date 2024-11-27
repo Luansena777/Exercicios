@@ -3,31 +3,31 @@ package ExercicioBiblioteca.dominio;
 import java.util.ArrayList;
 
 public class Biblioteca {
-    private ArrayList<Livro> livros;
-    private ArrayList<Usuario> usuarios;
+    private ArrayList<ExercicioBiblioteca.dominio.Livro> livros;
+    private ArrayList<ExercicioBiblioteca.dominio.Usuario> usuarios;
 
     public Biblioteca() {
         this.livros = new ArrayList<>();
         this.usuarios = new ArrayList<>();
     }
 
-    public void adicionarLivro(Livro livro) {
+    public void adicionarLivro(ExercicioBiblioteca.dominio.Livro livro) {
         livros.add(livro);
     }
-    public void registrarUsuario(Usuario usuario) {
+    public void registrarUsuario(ExercicioBiblioteca.dominio.Usuario usuario) {
         usuarios.add(usuario);
     }
 
     public void exibirUsuarios() {
         System.out.println("---Usuários---");
-        for (Usuario usuario : usuarios) {
+        for (ExercicioBiblioteca.dominio.Usuario usuario : usuarios) {
             usuario.exibirUsuario();
             System.out.println();
         }
     }
     public void exibiroBiblioteca() {
         System.out.println("--- Biblioteca ---");
-        for (Livro livro : livros) {
+        for (ExercicioBiblioteca.dominio.Livro livro : livros) {
             livro.exibirLivro();
             System.out.println();
         }

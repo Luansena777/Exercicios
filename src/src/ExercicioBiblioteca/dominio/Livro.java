@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Livro {
     private String titulo;
     private int anoPublicacao;
-    private ArrayList<Autor> autors;
+    private ArrayList<ExercicioBiblioteca.dominio.Autor> autors;
     private int totalCopias;
     private int copiasDisponiveis;
 
@@ -17,7 +17,7 @@ public class Livro {
         this.autors = new ArrayList<>();
     }
 
-    public void adiconarAutor(Autor autor) {
+    public void adiconarAutor(ExercicioBiblioteca.dominio.Autor autor) {
         autors.add(autor);
     }
 
@@ -40,7 +40,7 @@ public class Livro {
         System.out.println("Livro: " + this.titulo +
                 ", Publicação: " + this.anoPublicacao +
                 ", Cópias Disponíveis: " + this.copiasDisponiveis);
-        for (Autor autor : autors) {
+        for (ExercicioBiblioteca.dominio.Autor autor : autors) {
             autor.exibirAutor();
         }
     }

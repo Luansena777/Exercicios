@@ -34,9 +34,9 @@ public class Banco {
         this.nome = nome;
     }
 
-    public Cliente[] getClientes() {
-        return clientes;
-    }
+//    public Cliente[] getClientes() {
+//        return clientes;
+//    }
 
     public void setClientes(Cliente[] clientes) {
         this.clientes = clientes;
