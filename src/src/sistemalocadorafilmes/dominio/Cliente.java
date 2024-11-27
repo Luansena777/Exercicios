@@ -18,6 +18,15 @@ public class Cliente {
         return "Cliente: " + this.nome + " - ID: " + this.id + " - Filmes alugados: " + filmesAlugados.size();
     }
 
+    // Verifica se o cliente alugou um filme com base no título
+    public boolean temFilme(String titulo) {
+        for (Filme filme : filmesAlugados) {
+            filme.getTitulo().equalsIgnoreCase(titulo);
+            return true; //O cliente tem o filme alugado
+        }
+        return false; //O cliente nao tem o filme alugado
+    }
+
     public String getNome() {
         return nome;
     }

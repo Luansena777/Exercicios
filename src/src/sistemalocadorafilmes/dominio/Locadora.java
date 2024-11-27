@@ -11,16 +11,22 @@ public class Locadora {
         this.clientes = new ArrayList<>();
     }
 
+    //Métodos para cadastro
     public void cadastrarFilme(Filme filme) {
         filmes.add(filme);
+        System.out.println("Filme cadastrado: " + filme.getTitulo());
+
     }
 
     public void cadastrarCliente(Cliente cliente) {
         clientes.add(cliente);
+        System.out.println("Cliente cadastrado: " + cliente.getNome());
+
     }
 
-    public void consultatFilmeDisponivel() {
-        System.out.println("Filmes Disponíveis");
+    // Exibe os filmes disponíveis para aluguel
+    public void consultarFilmesDisponiveis() {
+        System.out.println("--- Filmes Disponíveis ---");
         for (Filme filmes : filmes) {
             if (filmes.isDisponivel()) {
                 System.out.println(filmes);
@@ -28,71 +34,81 @@ public class Locadora {
         }
     }
 
+    // Realiza o aluguel de um filme para um cliente
     public void alugarFilme(String titulo, int clienteId) {
-        Filme filmeParaAlugar = null;
-        Cliente cliente = null;
+        Filme filmeParaAlugar = buscarFilme(titulo);
+        Cliente cliente = buscarCliente(clienteId);
 
-        //Encontrar filme
-        for (Filme filme : filmes) {
-            if (filme.getTitulo().equalsIgnoreCase(titulo) && filme.isDisponivel()) {
-                filmeParaAlugar = filme;
-                break;
-            }
+        if (filmeParaAlugar == null || !filmeParaAlugar.isDisponivel()) {
+            System.out.println("Erro: Filme não disponível para aluguel.");
+            return;
         }
 
-        //Encontrar cliente
-        for (Cliente c : clientes) {
-            if (c.getId() == clienteId) {
-                cliente = c;
-                break;
-            }
+        if (cliente == null) {
+            System.out.println("Erro: Cliente não encontrado.");
+            return;
         }
 
-        //Validar e realizar o aluguel
-        if (filmeParaAlugar != null && cliente != null) {
-            filmeParaAlugar.setDisponivel(false);
-            cliente.getFilmesAlugados().add(filmeParaAlugar);
-            System.out.println(cliente.getNome() + " alugou o filme: " + filmeParaAlugar.getTitulo());
-        } else {
-            System.out.println("Erro: Filme indisponível ou cliente não encontrado.");
+        if (cliente.temFilme(titulo)) {
+            System.out.println("Erro: O cliente já alugou este filme.");
+            return;
         }
+
+
+        filmeParaAlugar.setDisponivel(false); // Marca o filme como alugado
+        cliente.getFilmesAlugados().add(filmeParaAlugar); // Adiciona o filme à lista de filmes alugados
+        System.out.println(cliente.getNome() + " alugou o filme: " + filmeParaAlugar.getTitulo());
+
     }
 
+    // Realiza a devolução de um filme por um cliente
     public void devolverFilme(String titulo, int clienteId) {
-        Cliente cliente = null;
+        Cliente cliente = buscarCliente(clienteId);
 
-        //Buscando cliente
-        for (Cliente c : clientes) {
-            if (c.getId() == clienteId) {
-                cliente = c;
+        if (cliente == null) {
+            System.out.println("Erro: Cliente não encontrado.");
+            return;
+        }
+
+        if (!cliente.temFilme(titulo)) {
+            System.out.println("Erro: O cliente não alugou este filme.");
+            return;
+        }
+
+
+        // Encontra o filme para devolução
+        Filme filmeParaDevolver = null;
+        for (Filme filme : cliente.getFilmesAlugados()) {
+            if (filme.getTitulo().equalsIgnoreCase(titulo)) {
+                filmeParaDevolver = filme;
                 break;
             }
         }
 
-        if (cliente != null) {
-            //Encontrar filme na lista do cliente
-            Filme filmeParaDevolver = null;
-            for (Filme filme : cliente.getFilmesAlugados()) {
-                if (filme.getTitulo().equalsIgnoreCase(titulo)) {
-                    filmeParaDevolver = filme;
-                    break;
-                }
+        filmeParaDevolver.setDisponivel(true); // Marca o filme como disponível
+        cliente.getFilmesAlugados().remove(filmeParaDevolver); // Remove o filme da lista de alugados
+        System.out.println(cliente.getNome() + " devolveu o filme: " + filmeParaDevolver.getTitulo());
+
+    }
+
+    // Busca um filme pelo título
+    private Filme buscarFilme(String titulo) {
+        for (Filme filme : filmes) {
+            if (filme.getTitulo().equalsIgnoreCase(titulo)) {
+                return filme;
             }
-
-
-            if (filmeParaDevolver != null) {
-                filmeParaDevolver.setDisponivel(true);
-                cliente.getFilmesAlugados().remove(filmeParaDevolver);
-                System.out.println(cliente.getNome() + " devolveu o filme: " + filmeParaDevolver.getTitulo());
-            } else {
-                System.out.println("Erro: Filme não encontrado nos filmes alugados pelo cliente.");
-
-            }
-
-        } else {
-            System.out.println("Erro: Cliente não encontrado.");
         }
+        return null;
+    }
 
+    // Busca um cliente pelo ID
+    private Cliente buscarCliente(int clienteId) {
+        for (Cliente cliente : clientes) {
+            if (cliente.getId() == clienteId) {
+                return cliente;
+            }
+        }
+        return null;
     }
 
 

@@ -1,5 +1,9 @@
 package sistemalocadorafilmes.dominio;
 
+/**
+ * Representa um filme que pode ser alugado em uma locadora.
+ */
+
 public class Filme {
     private String titulo;
     private String genero;
@@ -19,6 +23,14 @@ public class Filme {
                " - " + (disponivel ? "Disponível" : "Indisponível");
     }
 
+    public boolean isDisponivel() {
+        return disponivel;
+    }
+
+    public void setDisponivel(boolean disponivel) {
+        this.disponivel = disponivel;
+    }
+
     public String getTitulo() {
         return titulo;
     }
@@ -31,13 +43,5 @@ public class Filme {
 
     public int getAno() {
         return ano;
-    }
-
-    public boolean isDisponivel() {
-        return disponivel;
-    }
-
-    public void setDisponivel(boolean disponivel) {
-        this.disponivel = disponivel;
     }
 }
