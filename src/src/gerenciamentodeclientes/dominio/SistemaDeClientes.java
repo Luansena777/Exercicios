@@ -4,72 +4,73 @@ import gerenciamentodeclientes.exception.ClienteException;
 import gerenciamentodeclientes.exception.CpfException;
 import gerenciamentodeclientes.util.OrdenaPorNome;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SistemaDeClientes {
-    private List<Cliente> clienteList;
+    private Map<String, Cliente> clienteMap;
 
     public SistemaDeClientes() {
-        this.clienteList = new ArrayList<>();
+        this.clienteMap = new HashMap<>();
     }
 
     public void adicionarClientes(Cliente cliente) {
-        for (Cliente listCliente : clienteList) {
-            if (listCliente.getCpf().equals(cliente.getCpf())){
-                throw new CpfException("Já existe um cliente com este CPF.");
-            }
+        if (clienteMap.containsKey(cliente.getCpf())) {
+            throw new CpfException("Já existe um cliente com este CPF.");
         }
 
-        clienteList.add(cliente);
+        clienteMap.put(cliente.getCpf(), cliente);
         System.out.println("Cliente cadastrado com sucesso.");
     }
 
-    public void removerCliente(String cpf) {
-        for (Cliente cliente : clienteList) {
-            if (cpf.equals(cliente.getCpf())) {
-                clienteList.remove(cliente);
-                System.out.println("Cliente removido com sucesso!");
-                return;
-            }
+    public void buscarCliente(String cpf) {
+        Cliente cliente = clienteMap.get(cpf);
+        if (cliente == null) {
+            throw new ClienteException("Cliente não encontrado.");
         }
-        throw new IllegalArgumentException("Cliente com CPF " + cpf + " não encontrado.");
+
+        cliente.exibirDetalhes();
     }
+
+    public void removerCliente(String cpf) {
+        if (clienteMap.remove(cpf) == null) {
+            throw new IllegalArgumentException("Cliente com CPF " + cpf + " não encontrado.");
+        }
+
+        System.out.println("Cliente removido com sucesso!");
+    }
+
 
     public void listarClientes() {
-        if (clienteList.isEmpty()){
+        if (clienteMap.isEmpty()) {
             System.out.println("Nenhum cliente cadastrado.");
+            return;
         }
 
-        //Ordena em ordem alfabetica de A-Z
-        Collections.sort(clienteList, new OrdenaPorNome());
-        for (Cliente cliente : clienteList) {
-            System.out.println("Lista de Clientes:");
-            cliente.exibirDetalhes();
-        }
-    }
-
-    public void buscarCliente(String cpf) {
-        for (Cliente cliente : clienteList) {
-            if (cpf.equals(cliente.getCpf())) {
-                cliente.exibirDetalhes();
-                return;
-            }
-        }
-        throw new ClienteException("Cliente não encontrado.");
+        System.out.println("Lista de Clientes:");
+        clienteMap.values().stream()
+                .sorted(new OrdenaPorNome()) // Ordena antes de listar
+                .forEach(Cliente::exibirDetalhes);
     }
 
     public void atualizarCliente(String cpf, String newDataNascimento, String newEmail) {
-        for (Cliente cliente : clienteList) {
-            if (cpf.equals(cliente.getCpf())) {
-                cliente.setDataNascimento(newDataNascimento);
-                cliente.setEmail(newEmail);
-                System.out.println("Informações do cliente atualizadas com sucesso!");
-                return;
-            }
-        }
-        throw new ClienteException("Cliente não encontrado.");
-    }
+        if (clienteMap.containsKey(cpf)) {
+            Cliente cliente = clienteMap.get(cpf);
 
+            // Atualiza os dados do cliente
+            cliente.setDataNascimento(newDataNascimento);
+            cliente.setEmail(newEmail);
+
+            // Coloca o cliente atualizado de volta no mapa
+            clienteMap.put(cpf, cliente);
+
+            System.out.println("Informações do cliente atualizadas com sucesso!");
+            return;
+        }
+
+        // Se chegou aqui, significa que o cliente não foi encontrado.
+        throw new ClienteException("Cliente não encontrado.");
+
+    }
 }
+

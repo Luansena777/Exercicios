@@ -23,7 +23,7 @@ public class Aluno extends Pessoa implements CalcularNotas {
 
     @Override
     public void verificarAprovacao() {
-        if (media >= 13) {
+        if (media >= 15) {
             System.out.println("Aprovado.");
         } else {
             System.out.println("Reprovado.");

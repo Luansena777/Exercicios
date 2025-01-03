@@ -5,7 +5,7 @@ import sistemacadastroproduto.dominio.SistemaDeProdutos;
 
 import java.util.Scanner;
 
-public class Main {
+public class SistemaProdutosTest {
     public static void main(String[] args) {
         SistemaDeProdutos sistemaDeProdutos = new SistemaDeProdutos();
         Scanner scanner = new Scanner(System.in);

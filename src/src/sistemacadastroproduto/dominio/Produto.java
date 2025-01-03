@@ -6,8 +6,11 @@ public class Produto {
     private int quantidade;
 
     public Produto(String nome, double preco, int quantidade) {
-        if (preco < 0 || quantidade < 0) {
-            throw new IllegalArgumentException("Preço e quantidade não podem ser negativos.");
+        if (preco < 0) {
+            throw new IllegalArgumentException("Preço não pode ser negativo.");
+        }
+        if (quantidade < 0) {
+            throw new IllegalArgumentException("Quantidade não pode ser negativa.");
         }
         this.nome = nome;
         this.preco = preco;

@@ -20,7 +20,8 @@ public class Cliente {
     }
 
     public void exibirDetalhes() {
-        System.out.printf("%s, CPF: %s, Data de Nascimento: %s, Email: %s \n", this.nome, this.cpf, this.dataNascimento, this.email);
+        System.out.printf("%s, CPF: %s, Data de Nascimento: %s, Email: %s \n",
+                this.nome, this.cpf, this.dataNascimento, this.email);
 
     }
 

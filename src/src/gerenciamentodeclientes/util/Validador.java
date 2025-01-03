@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Validador {
+    
     public static boolean validarData(String data) {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         formato.setLenient(false); // Garante validação rigorosa
@@ -76,4 +77,5 @@ public class Validador {
         // Verifica os dígitos verificadores
         return resto1 == numeros[9] && resto2 == numeros[10];
     }
+
 }
